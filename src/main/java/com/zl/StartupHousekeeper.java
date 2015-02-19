@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.zl.daemons.ThreadPoolDaemon;
 import com.zl.interfaces.IJobDispatchDaemon;
+import com.zl.interfaces.ISocketListenerDaemon;
 import com.zl.utils.SimpleLogger;
 
 @Component
@@ -18,6 +19,9 @@ public class StartupHousekeeper implements ApplicationListener<ContextRefreshedE
 	@Autowired
 	public IJobDispatchDaemon jobDispatchDaemon;
 	
+	@Autowired
+	public ISocketListenerDaemon socketListenerDaemon;
+	
 	@Override
 	public void onApplicationEvent(final ContextRefreshedEvent event) {
 		SimpleLogger.info("Application has started");
@@ -27,7 +31,7 @@ public class StartupHousekeeper implements ApplicationListener<ContextRefreshedE
 	private void startServices() {
     	SimpleLogger.info("Starting services:");
     	threadPoolDaemon.start();
-//    	jobDispatchDaemon.start(ThreadPoolDaemon.getInstance());
     	jobDispatchDaemon.start();
+    	socketListenerDaemon.startListening();
     }
 }

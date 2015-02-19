@@ -1,5 +1,5 @@
-cd ../../../../WebCrawlerServerCommon
+cd ../../../../WebCrawlerServerV2Common
 mvn source:jar install
-cd ../WebCrawlerServerMaster
+cd ../WebCrawlerServerV2Master
 mvn eclipse:eclipse -DdownloadSources=true
 mvn spring-boot:run 

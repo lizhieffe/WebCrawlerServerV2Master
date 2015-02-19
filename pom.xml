@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>web.crawler.server</groupId>
+    <groupId>web.crawler.server.v2</groupId>
     <artifactId>web-crawler-server-master</artifactId>
     <version>0.1.0</version>
 
@@ -24,7 +24,7 @@
             <version>1.2.14</version>
         </dependency>
         <dependency>
-            <groupId>web.crawler.server</groupId>
+            <groupId>web.crawler.server.v2</groupId>
             <artifactId>web-crawler-server-common</artifactId>
             <version>0.1.0</version>
         </dependency>
