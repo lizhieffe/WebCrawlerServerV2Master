@@ -5,7 +5,7 @@ import java.util.List;
 import com.zl.server.nodes.SlaveNode;
 
 public interface ISlaveManager {
-	public boolean addSlave(String ip, int port);
+	boolean addSlave(String ip, int port, int socketPort);
 	public boolean removeSlave(SlaveNode slave);
 	public boolean removeSlave(String ip, int port);
 	public boolean containsSlave(String ip, int port);

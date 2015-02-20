@@ -31,13 +31,15 @@ public class CSlave {
 
 		String ip = slave.getIp();
 		int port = slave.getPort();
+		int socketPort = slave.getSocket_port();
 		
 		RSimpleResponse response = null;
-		if (ip == null || !ServerNodeHelper.isValidIp(ip) || !ServerNodeHelper.isValidPort(String.valueOf(port))) {
+		if (ip == null || !ServerNodeHelper.isValidIp(ip) || !ServerNodeHelper.isValidPort(String.valueOf(port))
+				|| !ServerNodeHelper.isValidPort(String.valueOf(socketPort))) {
 			response = SimpleResponseFactory.generateFailSerciveResponseTemplate(1, "", "Invalid parameter");
 		}
 		else {
-			boolean addSlaveSucceed = slaveManager.containsSlave(ip, port) || slaveManager.addSlave(ip, port);
+			boolean addSlaveSucceed = slaveManager.containsSlave(ip, port) || slaveManager.addSlave(ip, port, socketPort);
 			if (!addSlaveSucceed) {
 				return SimpleResponseFactory.generateFailSerciveResponseTemplate(1, "", "Cannot add slave");
 			}
@@ -64,8 +66,8 @@ public class CSlave {
 			response = SimpleResponseFactory.generateFailSerciveResponseTemplate(1, "", "Invalid parameter");
 		}
 		else {
-			boolean addSlaveSucceed = slaveManager.removeSlave(ip, port);
-			if (!addSlaveSucceed) {
+			boolean removeSlaveSucceed = slaveManager.removeSlave(ip, port);
+			if (!removeSlaveSucceed) {
 				response = SimpleResponseFactory.generateFailSerciveResponseTemplate(1, "", "Cannot remove slave");
 			}
 			else

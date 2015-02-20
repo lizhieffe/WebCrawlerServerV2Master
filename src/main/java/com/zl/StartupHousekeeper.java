@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 
 import com.zl.daemons.ThreadPoolDaemon;
 import com.zl.interfaces.IJobDispatchDaemon;
-import com.zl.interfaces.ISocketListenerDaemon;
+import com.zl.interfaces.IServerSocketListenerDaemon;
+import com.zl.managers.JobManager;
+import com.zl.sockets.JobListenerCallback;
 import com.zl.utils.SimpleLogger;
 
 @Component
@@ -20,7 +22,10 @@ public class StartupHousekeeper implements ApplicationListener<ContextRefreshedE
 	public IJobDispatchDaemon jobDispatchDaemon;
 	
 	@Autowired
-	public ISocketListenerDaemon socketListenerDaemon;
+	public IServerSocketListenerDaemon serverSocketListenerDaemon;
+	
+	@Autowired
+	private JobManager jobManager;
 	
 	@Override
 	public void onApplicationEvent(final ContextRefreshedEvent event) {
@@ -32,6 +37,8 @@ public class StartupHousekeeper implements ApplicationListener<ContextRefreshedE
     	SimpleLogger.info("Starting services:");
     	threadPoolDaemon.start();
     	jobDispatchDaemon.start();
-    	socketListenerDaemon.startListening();
+    	
+    	serverSocketListenerDaemon.addSocketListenerCallback(new JobListenerCallback(jobManager));
+    	serverSocketListenerDaemon.start();
     }
 }

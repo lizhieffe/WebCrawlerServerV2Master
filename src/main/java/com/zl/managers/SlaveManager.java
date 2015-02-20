@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import com.zl.daemons.JobDispatchDaemon;
 import com.zl.interfaces.IJobDispatchDaemon;
 import com.zl.interfaces.ISlaveManager;
 import com.zl.server.nodes.ServerNodeHelper;
@@ -31,7 +30,7 @@ public class SlaveManager implements ISlaveManager {
 	}
 	
 	@Override
-	public boolean addSlave(String ip, int port) {
+	public boolean addSlave(String ip, int port, int socketPort) {
 		
 		synchronized(this) {
 			if (relationIpSlave.containsKey(ServerNodeHelper.constructHost(ip, port)))
@@ -41,6 +40,7 @@ public class SlaveManager implements ISlaveManager {
 		SlaveNode slave = new SlaveNode();
 		slave.setIp(ip);
 		slave.setPort(port);
+		slave.setSocketPort(socketPort);
 		synchronized(this) {
 			slaves.add(slave);
 			relationIpSlave.put(slave.getDomain(), slave);

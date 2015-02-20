@@ -15,10 +15,10 @@ import com.zl.managers.SlaveManager;
 import com.zl.utils.SimpleLogger;
 
 @Component
-public class JobDispatchDaemon implements IJobDispatchDaemon, IDaemon, IJobToDispatchMonitor, ISlaveMonitor {
+public class DispatchJobDaemon implements IJobDispatchDaemon, IDaemon, IJobToDispatchMonitor, ISlaveMonitor {
 	
 	@Autowired
-	public JobDispatchDaemonHelper helper;
+	public DispatchJobDaemonHelper helper;
 
 	@Autowired
 	public JobManager jobManager;
@@ -28,7 +28,7 @@ public class JobDispatchDaemon implements IJobDispatchDaemon, IDaemon, IJobToDis
 	
 	private boolean started;
 	
-	public JobDispatchDaemon() {
+	public DispatchJobDaemon() {
 	}
 
 	@Override
